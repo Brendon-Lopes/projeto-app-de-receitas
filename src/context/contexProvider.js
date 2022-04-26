@@ -24,7 +24,7 @@ function ContextProvider({ children }) {
   useEffect(() => {
     const emailRegex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}/g;
     const MIN_PASSWORD_LEN = 6;
-    if (emailRegex.test(email) && password.length >= MIN_PASSWORD_LEN) {
+    if (emailRegex.test(email) && password.length > MIN_PASSWORD_LEN) {
       setDisabled(false);
     } else {
       setDisabled(true);
