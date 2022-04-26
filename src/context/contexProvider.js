@@ -1,10 +1,47 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import Context from './context';
 
 function ContextProvider({ children }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isDisabled, setDisabled] = useState(true);
+
+  function changeEmail(event) {
+    setEmail(event.target.value);
+  }
+
+  function changePassword(event) {
+    setPassword(event.target.value);
+  }
+
+  // function handleClick() {
+  //   const emailRegex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}/g;
+  //   const MIN_PASSWORD_LEN = 6;
+  //   setDisabled(emailRegex.test(email) && password.length >= MIN_PASSWORD_LEN);
+  // }
+
+  useEffect(() => {
+    const emailRegex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}/g;
+    const MIN_PASSWORD_LEN = 6;
+    if (emailRegex.test(email) && password.length > MIN_PASSWORD_LEN) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [email, password]);
+
+  const context = {
+    email,
+    password,
+    isDisabled,
+    changeEmail,
+    changePassword,
+    // handleClick,
+  };
+
   return (
-    <Context.Provider value={ 1 }>
+    <Context.Provider value={ context }>
       {children}
     </Context.Provider>
   );
