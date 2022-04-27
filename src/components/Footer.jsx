@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import drinkIcon from '../images/drinkIcon.svg';
 import foodIcon from '../images/mealIcon.svg';
 import exploreIcon from '../images/exploreIcon.svg';
+import './footer.css';
 
 function Footer() {
   return (
-    <footer data-testid="footer">
-      <Link to="/drink">
+    <footer className="footer-container" data-testid="footer">
+      <Link to="/drinks">
         <img
           src={ drinkIcon }
           alt="drinks"
@@ -25,15 +26,14 @@ function Footer() {
         />
       </Link>
 
-      <Link to="/food">
+      <Link to="/foods">
         <img
           src={ foodIcon }
-          alt="food"
+          alt="foods"
           role="presentation"
           data-testid="food-bottom-btn"
         />
       </Link>
-
     </footer>
   );
 }
