@@ -15,12 +15,6 @@ function ContextProvider({ children }) {
     setPassword(event.target.value);
   }
 
-  // function handleClick() {
-  //   const emailRegex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}/g;
-  //   const MIN_PASSWORD_LEN = 6;
-  //   setDisabled(emailRegex.test(email) && password.length >= MIN_PASSWORD_LEN);
-  // }
-
   useEffect(() => {
     const emailRegex = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}/g;
     const MIN_PASSWORD_LEN = 6;
@@ -37,7 +31,6 @@ function ContextProvider({ children }) {
     isDisabled,
     changeEmail,
     changePassword,
-    // handleClick,
   };
 
   return (
