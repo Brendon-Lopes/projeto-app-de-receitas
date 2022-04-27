@@ -1,12 +1,12 @@
 import React from 'react';
 import Header from '../components/Header';
 
-function Profile() {
+function DoneRecipes() {
   return (
     <div>
-      <Header title="Profile" />
+      <Header title="Done Recipes" />
     </div>
   );
 }
 
-export default Profile;
+export default DoneRecipes;

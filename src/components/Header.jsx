@@ -4,12 +4,8 @@ import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
-function Header({ history, title, visibleSearchIcon }) {
+function Header({ title, visibleSearchIcon }) {
   const [search, setSearch] = useState(false);
-
-  const handleClick = () => {
-    history.push('/profile');
-  };
 
   const showSearchBar = () => {
     setSearch(!search);
@@ -21,8 +17,6 @@ function Header({ history, title, visibleSearchIcon }) {
         <img
           src={ profileIcon }
           alt="search"
-          onClick={ handleClick }
-          role="presentation"
           data-testid="profile-top-btn"
         />
       </Link>
@@ -50,9 +44,8 @@ function Header({ history, title, visibleSearchIcon }) {
 }
 
 Header.propTypes = {
-  history: propTypes.shape({
-    push: propTypes.func.isRequired,
-  }).isRequired,
+  title: propTypes.string,
+  visibleSearchIcon: propTypes.bool,
 }.isRequired;
 
 export default Header;
