@@ -1,15 +1,27 @@
 import React, { useContext } from 'react';
+import propTypes from 'prop-types';
 import Context from '../context/context';
+import useLocalStorage from '../hooks/useLocalStorage';
 
-function Login() {
+function Login({ history }) {
+  const [, setLocalEmail] = useLocalStorage('user', '');
+  const [, setMealsToken] = useLocalStorage('mealsToken', '');
+  const [, setCocktailsToken] = useLocalStorage('cocktailsToken', '');
+
   const {
     email,
     password,
     isDisabled,
     changeEmail,
     changePassword,
-    // handleClick,
   } = useContext(Context);
+
+  const handleClick = () => {
+    history.push('/foods');
+    setLocalEmail({ email });
+    setMealsToken(1);
+    setCocktailsToken(1);
+  };
 
   return (
     <form>
@@ -39,12 +51,18 @@ function Login() {
         data-testid="login-submit-btn"
         type="button"
         disabled={ isDisabled }
-        // onClick={ handleClick }
+        onClick={ handleClick }
       >
         Enter
       </button>
     </form>
   );
 }
+
+Login.propTypes = {
+  history: propTypes.shape({
+    push: propTypes.func.isRequired,
+  }).isRequired,
+};
 
 export default Login;
