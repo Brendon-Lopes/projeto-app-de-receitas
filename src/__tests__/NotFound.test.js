@@ -2,7 +2,7 @@ import React from 'react';
 import { screen, render } from '@testing-library/react';
 // import { Router } from 'react-router-dom';
 // import { createMemoryHistory } from 'history';
-import NotFound from '../components/NotFound';
+import NotFound from '../pages/NotFound';
 
 describe('Testa página NotFound', () => {
   it('Testa se aparece o texto correto na página', () => {
