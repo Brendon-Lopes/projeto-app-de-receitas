@@ -34,10 +34,42 @@ function Header({ title, visibleSearchIcon }) {
       )}
 
       {search && (
-        <input
-          type="text"
-          data-testid="search-input"
-        />
+        <section id="search">
+          <input
+            type="text"
+            data-testid="search-input"
+          />
+          <div id="search-filter">
+            <label htmlFor="ingredient">
+              Ingredient
+              <input
+                type="radio"
+                name="search"
+                value="ingredient"
+                data-testid="ingredient-search-radio"
+              />
+            </label>
+            <label htmlFor="name">
+              Name
+              <input
+                type="radio"
+                name="search"
+                value="name"
+                data-testid="name-search-radio"
+              />
+            </label>
+            <label htmlFor="first-letter">
+              First letter
+              <input
+                type="radio"
+                name="search"
+                value="first-letter"
+                data-testid="first-letter-search-radio"
+              />
+            </label>
+          </div>
+          <button type="button" data-testid="exec-search-btn">Search</button>
+        </section>
       )}
     </header>
   );
