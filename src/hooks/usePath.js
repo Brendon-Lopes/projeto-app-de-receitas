@@ -4,8 +4,8 @@ const usePath = () => {
   const { pathname } = useLocation();
 
   const routes = {
-    '/foods': { id: 'idMeal', name: 'meals', title: 'Foods' },
-    '/drinks': { id: 'idDrink', name: 'drinks', title: 'Drinks' },
+    '/foods': { id: 'idMeal', name: 'meals' },
+    '/drinks': { id: 'idDrink', name: 'drinks' },
   };
 
   return {
@@ -13,7 +13,6 @@ const usePath = () => {
     routes,
     id: routes[pathname].id,
     name: routes[pathname].name,
-    title: routes[pathname].title,
   };
 };
 
