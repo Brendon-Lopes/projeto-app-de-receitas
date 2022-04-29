@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import propTypes from 'prop-types';
-import Context from '../context/context';
+import Context from '../context/generalContext/context';
 import useLocalStorage from '../hooks/useLocalStorage';
 
 function Login({ history }) {
