@@ -1,10 +1,17 @@
 import React, { useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import SearchContext from '../context/searchContext';
+import usePath from '../hooks/usePath';
+import fetchFoodAPI from '../services/fetchFoodAPI';
 
 function SearchBar() {
+  const { pathname, id, name } = usePath();
+  const { push } = useHistory();
+
   const {
     selectedRadio, setSelectedRadio,
     searchValue, setSearchValue,
+    setApiData,
   } = useContext(SearchContext);
 
   const handleRadioChange = ({ target }) => {
@@ -12,9 +19,26 @@ function SearchBar() {
     setSelectedRadio(value);
   };
 
-  const handleSubmit = (event) => {
+  const validation = () => {
+    if (searchValue === '') {
+      return global.alert('Please enter a search term');
+    }
+    if (selectedRadio === 'first-letter' && searchValue.length > 1) {
+      global.alert('Your search must have only 1 (one) character');
+    }
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(selectedRadio);
+    validation();
+    const data = await fetchFoodAPI(selectedRadio, searchValue, pathname);
+    if (data[name] === null) {
+      return global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    }
+    if (data[name].length === 1) {
+      push(`${pathname}/${data[name][0][id]}`);
+    }
+    setApiData(data[name]);
   };
 
   return (

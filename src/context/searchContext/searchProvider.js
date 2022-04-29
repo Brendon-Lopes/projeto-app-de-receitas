@@ -5,12 +5,15 @@ import SearchContext from '.';
 function SearchProvider({ children }) {
   const [selectedRadio, setSelectedRadio] = useState('ingredient');
   const [searchValue, setSearchValue] = useState('');
+  const [apiData, setApiData] = useState([]);
 
   const value = {
     selectedRadio,
     setSelectedRadio,
     searchValue,
     setSearchValue,
+    apiData,
+    setApiData,
   };
 
   return (

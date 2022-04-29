@@ -7,7 +7,7 @@ import exploreIcon from '../images/exploreIcon.svg';
 function Footer() {
   return (
     <footer data-testid="footer">
-      <Link to="/drink">
+      <Link to="/drinks">
         <img
           src={ drinkIcon }
           alt="drinks"
@@ -25,7 +25,7 @@ function Footer() {
         />
       </Link>
 
-      <Link to="/food">
+      <Link to="/foods">
         <img
           src={ foodIcon }
           alt="food"
