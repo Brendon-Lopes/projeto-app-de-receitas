@@ -11,7 +11,7 @@ function SearchBar() {
   const {
     selectedRadio, setSelectedRadio,
     searchValue, setSearchValue,
-    setApiData,
+    setFoodsList, setDrinksList,
   } = useContext(SearchContext);
 
   const handleRadioChange = ({ target }) => {
@@ -38,7 +38,8 @@ function SearchBar() {
     if (data[name].length === 1) {
       push(`${pathname}/${data[name][0][id]}`);
     }
-    setApiData(data[name]);
+    if (pathname === '/foods') setFoodsList(data[name]);
+    if (pathname === '/drinks') setDrinksList(data[name]);
   };
 
   return (
