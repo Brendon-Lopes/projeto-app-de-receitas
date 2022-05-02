@@ -40,8 +40,8 @@ function ContextProvider({ children }) {
   );
 }
 
-export default ContextProvider;
-
 ContextProvider.propTypes = {
   children: propTypes.node,
 }.isRequired;
+
+export default ContextProvider;

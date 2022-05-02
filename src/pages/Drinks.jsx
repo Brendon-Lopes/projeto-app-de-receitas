@@ -1,5 +1,5 @@
 import React from 'react';
-import DrinkCard from '../components/DrinkCard';
+import DrinksResults from '../components/DrinksResults';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
@@ -7,7 +7,8 @@ function Drinks() {
   return (
     <div>
       <Header title="Drinks" visibleSearchIcon />
-      <DrinkCard />
+      <p>Drinks</p>
+      <DrinksResults />
       <Footer />
     </div>
   );
