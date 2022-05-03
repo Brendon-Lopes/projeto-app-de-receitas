@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe.only('67 - Implemente os elementos da tela de explorar respeitando os atributos descritos no protótipo', () => {
+describe('67 - Implemente os elementos da tela de explorar respeitando os atributos descritos no protótipo', () => {
   it('Tem os data-testids explore-foods e explore-drinks', () => {
     cy.visit('http://localhost:3000/explore');
 

@@ -8,7 +8,7 @@ afterEach(() => {
   });
 });
 
-describe.only('33 - Implemente os elementos da tela de detalhes de uma receita respeitando os atributos descritos no protótipo', () => {
+describe('33 - Implemente os elementos da tela de detalhes de uma receita respeitando os atributos descritos no protótipo', () => {
   it('A tela de comida possui todos os atributos data-testid', () => {
     cy.visit('http://localhost:3000/foods/52771', {
       onBeforeLoad(win) {
