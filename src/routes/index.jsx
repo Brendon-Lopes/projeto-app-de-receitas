@@ -6,7 +6,6 @@ import FoodsDetails from '../pages/FoodsDetails';
 import Profile from '../pages/Profile';
 import NotFound from '../pages/NotFound';
 import Drinks from '../pages/Drinks';
-import DrinksDetails from '../pages/DrinksDetails';
 import InProgress from '../pages/InProgress';
 import Explore from '../pages/Explore';
 import ExploreFoods from '../pages/ExploreFoods';
@@ -26,7 +25,7 @@ function Routes() {
         <Route exact path="/foods/:id" component={ FoodsDetails } />
         <Route exact path="/foods/:id/in-progress" component={ InProgress } />
         <Route exact path="/drinks" component={ Drinks } />
-        <Route exact path="/drinks/:id" component={ DrinksDetails } />
+        <Route exact path="/drinks/:id" component={ FoodsDetails } />
         <Route exact path="/drinks/:id/in-progress" component={ InProgress } />
         <Route exact path="/explore" component={ Explore } />
         <Route exact path="/explore/foods" component={ ExploreFoods } />
