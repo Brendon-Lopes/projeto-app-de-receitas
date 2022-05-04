@@ -53,7 +53,7 @@ function FoodsResults() {
       {foodsList.length > 0 && foodsList
         .filter((_e, index) => index < maxNumber)
         .map(({ strMeal, strMealThumb, idMeal }, index) => (
-          <Link push to={ `/foods/${idMeal}` } key={ index }>
+          <Link to={ `/foods/${idMeal}` } key={ index }>
             <div data-testid={ `${index}-recipe-card` }>
               <p data-testid={ `${index}-card-name` }>{strMeal}</p>
               <img
