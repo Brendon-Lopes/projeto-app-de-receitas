@@ -10,6 +10,8 @@ const usePath = () => {
     pathname,
     id: returnFoodOrDrink('idMeal', 'idDrink'),
     name: returnFoodOrDrink('meals', 'drinks'),
+    literalName: returnFoodOrDrink('foods', 'drinks'),
+    inProgressName: returnFoodOrDrink('meals', 'cocktails'),
     strName: returnFoodOrDrink('strMeal', 'strDrink'),
     strNameI: returnFoodOrDrink('strDrink', 'strMeal'),
     strNameThumb: returnFoodOrDrink('strMealThumb', 'strDrinkThumb'),

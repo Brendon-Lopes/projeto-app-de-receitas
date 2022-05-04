@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
+import useLocalStorage from '../../hooks/useLocalStorage';
 import DetailsContext from '.';
 import { getFoodDetailsById, getDrinkDetailsById } from '../../services/fetchAPI';
 
@@ -8,16 +9,7 @@ function DetailsProvider({ children }) {
   const [foodDetails, setFoodDetails] = useState({});
   const [foodIngredients, setFoodIngredients] = useState([]);
   const [name, setName] = useState('');
-
-  const value = {
-    foodDetails,
-    setFoodDetails,
-    foodId,
-    setFoodId,
-    foodIngredients,
-    setFoodIngredients,
-    setName,
-  };
+  const [doneRecipes] = useLocalStorage('doneRecipes', []);
 
   useEffect(() => {
     if (foodId !== 0) {
@@ -31,6 +23,17 @@ function DetailsProvider({ children }) {
       getDetails();
     }
   }, [name, foodId]);
+
+  const value = {
+    foodDetails,
+    setFoodDetails,
+    foodId,
+    setFoodId,
+    foodIngredients,
+    setFoodIngredients,
+    setName,
+    doneRecipes,
+  };
 
   useEffect(() => {
     const foodDetailsEntries = Object.entries(foodDetails);

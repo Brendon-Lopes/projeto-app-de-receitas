@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import usePath from '../hooks/usePath';
 import DetailsContext from '../context/detailsContext';
 import shareIcon from '../images/shareIcon.svg';
@@ -8,13 +8,26 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import YoutubeEmbed from '../components/YoutubeEmbed';
 import { getDrinksRecipes, getFoodRecipes } from '../services/fetchAPI';
 import RecomendationCard from '../components/RecomendationCard';
+import useLocalStorage from '../hooks/useLocalStorage';
 import './FoodsDetails.css';
 
 function FoodDetails() {
+  const inProgressDefaultValue = {
+    cocktails: {},
+    meals: {},
+  };
+
+  const [doneRecipes] = useLocalStorage('doneRecipes', []);
+  const [inProgressRecipes] = useLocalStorage(
+    'inProgressRecipes', inProgressDefaultValue,
+  );
+
   const { name, strName, strNameThumb, strCategory,
-    strNameI, strNameThumbI, strCategoryI } = usePath();
+    strNameI, strNameThumbI, strCategoryI, literalName,
+    inProgressName } = usePath();
 
   const { id } = useParams();
+  const { push } = useHistory();
 
   const { setFoodId,
     foodDetails,
@@ -22,6 +35,21 @@ function FoodDetails() {
     setName } = useContext(DetailsContext);
 
   const [recomendations, setRecomendations] = useState([]);
+  const [buttonText, setButtonText] = useState('');
+  const [isRecipeDone, setIsRecipeDone] = useState(false);
+
+  useEffect(() => {
+    if (inProgressRecipes[inProgressName][id]) {
+      setButtonText('Continue Recipe');
+    } else {
+      setButtonText('Start Recipe');
+    }
+  }, [id, inProgressName, inProgressRecipes]);
+
+  useEffect(() => {
+    const checkIfDone = doneRecipes.some(({ id: recipeId }) => recipeId === id);
+    setIsRecipeDone(checkIfDone);
+  }, [doneRecipes, id]);
 
   useEffect(() => {
     setName(name);
@@ -103,13 +131,16 @@ function FoodDetails() {
         ))}
       </section>
 
-      <button
-        className="start-recipe-btn"
-        data-testid="start-recipe-btn"
-        type="button"
-      >
-        Start Recipe
-      </button>
+      {!isRecipeDone && (
+        <button
+          className="start-recipe-btn"
+          data-testid="start-recipe-btn"
+          type="button"
+          onClick={ () => push(`/${literalName}/${id}/in-progress`) }
+        >
+          {buttonText}
+        </button>
+      )}
     </div>
   );
 }
