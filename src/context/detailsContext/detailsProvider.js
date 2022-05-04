@@ -15,7 +15,6 @@ function DetailsProvider({ children }) {
         const details = name === 'meals'
           ? await getFoodDetailsById(foodId)
           : await getDrinkDetailsById(foodId);
-
         setFoodDetails(details);
       };
       getDetails();
@@ -37,15 +36,20 @@ function DetailsProvider({ children }) {
 
     const filteredIngredients = foodDetailsEntries
       .filter((arr) => arr[0].includes('strIngredient'))
-      .filter((arr) => arr[1] !== '' && arr[1] !== null);
+      .filter((arr) => arr[1]);
 
     const filteredMeasures = foodDetailsEntries
       .filter((arr) => arr[0].includes('strMeasure'))
-      .filter((arr) => arr[1] !== '' && arr[1] !== null);
+      .filter((arr) => arr[1]);
+
+    console.log(filteredMeasures);
 
     const ingredientsWithMeasures = filteredIngredients
       .reduce((acc, curr, index) => (
-        [...acc, { ingredient: curr[1], measure: filteredMeasures[index][1] }]), []);
+        [...acc, {
+          ingredient: curr[1],
+          measure: (filteredMeasures[index] && ` - ${filteredMeasures[index][1]}`) || '',
+        }]), []);
 
     setFoodIngredients(ingredientsWithMeasures);
   }, [foodDetails]);
