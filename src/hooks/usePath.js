@@ -11,6 +11,7 @@ const usePath = () => {
     id: returnFoodOrDrink('idMeal', 'idDrink'),
     name: returnFoodOrDrink('meals', 'drinks'),
     literalName: returnFoodOrDrink('foods', 'drinks'),
+    type: returnFoodOrDrink('food', 'drink'),
     inProgressName: returnFoodOrDrink('meals', 'cocktails'),
     strName: returnFoodOrDrink('strMeal', 'strDrink'),
     strNameI: returnFoodOrDrink('strDrink', 'strMeal'),

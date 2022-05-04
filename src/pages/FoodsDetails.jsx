@@ -2,13 +2,12 @@ import React, { useEffect, useContext, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import usePath from '../hooks/usePath';
 import DetailsContext from '../context/detailsContext';
-import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-// import blackHeartIcon from '../images/blackHeartIcon.svg';
 import YoutubeEmbed from '../components/YoutubeEmbed';
 import { getDrinksRecipes, getFoodRecipes } from '../services/fetchAPI';
 import RecomendationCard from '../components/RecomendationCard';
 import useLocalStorage from '../hooks/useLocalStorage';
+import FavoriteButton from '../components/FavoriteButton';
+import ShareButton from '../components/ShareButton';
 import './FoodsDetails.css';
 
 function FoodDetails() {
@@ -80,20 +79,10 @@ function FoodDetails() {
         alt={ foodDetails[strName] }
       />
       <h2 data-testid="recipe-title">{foodDetails[strName]}</h2>
-      <section>
-        <img
-          src={ shareIcon }
-          alt="share"
-          role="presentation"
-          data-testid="share-btn"
-        />
-        <img
-          src={ whiteHeartIcon }
-          alt="favorite"
-          role="presentation"
-          data-testid="favorite-btn"
-        />
-      </section>
+
+      <ShareButton />
+      <FavoriteButton />
+
       <h2 data-testid="recipe-category">{foodDetails[strCategory]}</h2>
 
       <h2>Ingredients</h2>
