@@ -42,8 +42,6 @@ function DetailsProvider({ children }) {
       .filter((arr) => arr[0].includes('strMeasure'))
       .filter((arr) => arr[1]);
 
-    console.log(filteredMeasures);
-
     const ingredientsWithMeasures = filteredIngredients
       .reduce((acc, curr, index) => (
         [...acc, {
