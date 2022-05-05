@@ -7,7 +7,6 @@ function Foods() {
   return (
     <div>
       <Header title="Foods" visibleSearchIcon />
-      <p>Foods</p>
       <FoodsResults />
       <Footer />
     </div>

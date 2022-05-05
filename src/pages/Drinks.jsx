@@ -7,7 +7,6 @@ function Drinks() {
   return (
     <div>
       <Header title="Drinks" visibleSearchIcon />
-      <p>Drinks</p>
       <DrinksResults />
       <Footer />
     </div>

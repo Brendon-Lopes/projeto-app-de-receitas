@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { Button, ButtonGroup, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import SearchContext from '../context/searchContext';
 import { fetchDrinksByCategory, getDrinksRecipes } from '../services/fetchAPI';
@@ -27,42 +28,54 @@ function DrinksResults() {
   return (
     <main>
       <section>
-        <button
-          type="button"
-          data-testid="All-category-filter"
-          value="All"
-          onClick={ (event) => filterCategory(event.target.value) }
+        <ButtonGroup
+          style={ { width: '100%' } }
+          className="me-2"
+          aria-label="First group"
         >
-          All
-        </button>
-        {drinksCategoryList
-          .slice(0, MAX_CATEGORY)
-          .map((elem, index) => (
-            <button
-              key={ index }
-              type="button"
-              data-testid={ `${elem.strCategory}-category-filter` }
-              value={ elem.strCategory }
-              onClick={ (event) => filterCategory(event.target.value) }
-            >
-              {elem.strCategory}
-            </button>
-          ))}
+          <Button
+            variant="secondary"
+            type="button"
+            data-testid="All-category-filter"
+            value="All"
+            onClick={ (event) => filterCategory(event.target.value) }
+          >
+            All
+          </Button>
+          {drinksCategoryList
+            .slice(0, MAX_CATEGORY)
+            .map((elem, index) => (
+              <Button
+                variant="secondary"
+                key={ index }
+                type="button"
+                data-testid={ `${elem.strCategory}-category-filter` }
+                value={ elem.strCategory }
+                onClick={ (event) => filterCategory(event.target.value) }
+              >
+                {elem.strCategory}
+              </Button>
+            ))}
+        </ButtonGroup>
       </section>
 
       {drinksList.length > 0 && drinksList
         .filter((_e, index) => index < maxNumber)
         .map(({ strDrink, strDrinkThumb, idDrink }, index) => (
-          <Link to={ `/drinks/${idDrink}` } key={ index }>
-            <div data-testid={ `${index}-recipe-card` }>
-              <p data-testid={ `${index}-card-name` }>{strDrink}</p>
-              <img
-                src={ strDrinkThumb }
-                alt="recipe"
-                data-testid={ `${index}-card-img` }
-              />
-            </div>
-          </Link>
+          <Card style={ { width: '20rem' } } key={ index }>
+            <Link to={ `/drinks/${idDrink}` }>
+              <div data-testid={ `${index}-recipe-card` }>
+                <Card.Header data-testid={ `${index}-card-name` }>
+                  {strDrink}
+                </Card.Header>
+                <Card.Img
+                  src={ strDrinkThumb }
+                  alt="recipe"
+                  data-testid={ `${index}-card-img` }
+                />
+              </div>
+            </Link>
+          </Card>
         ))}
     </main>
   );

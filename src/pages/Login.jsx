@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import propTypes from 'prop-types';
+import { Button, Form } from 'react-bootstrap';
 import Context from '../context/generalContext/context';
 import useLocalStorage from '../hooks/useLocalStorage';
 
@@ -25,8 +26,10 @@ function Login({ history }) {
 
   return (
     <form>
-      <label htmlFor="email-input">
-        <input
+      <h1>Login</h1>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Email address</Form.Label>
+        <Form.Control
           data-testid="email-input"
           type="text"
           name="email"
@@ -34,10 +37,11 @@ function Login({ history }) {
           value={ email }
           onChange={ changeEmail }
         />
-      </label>
+      </Form.Group>
 
-      <label htmlFor="password-input">
-        <input
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Password</Form.Label>
+        <Form.Control
           data-testid="password-input"
           type="password"
           name="password"
@@ -45,16 +49,17 @@ function Login({ history }) {
           value={ password }
           onChange={ changePassword }
         />
-      </label>
+      </Form.Group>
 
-      <button
+      <Button
+        variant="success"
         data-testid="login-submit-btn"
         type="button"
         disabled={ isDisabled }
         onClick={ handleClick }
       >
         Enter
-      </button>
+      </Button>
     </form>
   );
 }

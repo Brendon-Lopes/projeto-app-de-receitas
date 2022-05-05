@@ -1,7 +1,13 @@
 .footer-container {
+  background-color: rgba(216, 226, 73, 0.63);
   bottom: 0%;
   height: 50px;
-  left: 0%;
-  margin-bottom: 0%;
+  padding: 0%;
   position: fixed;
+  width: 360px;
+}
+
+.footer-container img {
+  height: 40px;
+  width: 33%;
 }

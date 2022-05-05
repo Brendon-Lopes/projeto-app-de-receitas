@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { Navbar } from 'react-bootstrap';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
@@ -13,7 +14,7 @@ function Header({ title, visibleSearchIcon }) {
   };
 
   return (
-    <header>
+    <Navbar style={ { width: '100%' } } bg="warning" expand="lg">
       <Link to="/profile">
         <img
           src={ profileIcon }
@@ -35,7 +36,7 @@ function Header({ title, visibleSearchIcon }) {
       )}
 
       {search && <SearchBar />}
-    </header>
+    </Navbar>
   );
 }
 
