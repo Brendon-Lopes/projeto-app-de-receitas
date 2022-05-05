@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 import usePath from '../hooks/usePath';
 import DetailsContext from '../context/detailsContext';
 import YoutubeEmbed from '../components/YoutubeEmbed';
@@ -17,7 +18,7 @@ function FoodDetails() {
   };
 
   const [doneRecipes] = useLocalStorage('doneRecipes', []);
-  const [inProgressRecipes] = useLocalStorage(
+  const [inProgressRecipes, setInProgressRecipes] = useLocalStorage(
     'inProgressRecipes', inProgressDefaultValue,
   );
 
@@ -36,12 +37,15 @@ function FoodDetails() {
   const [recomendations, setRecomendations] = useState([]);
   const [buttonText, setButtonText] = useState('');
   const [isRecipeDone, setIsRecipeDone] = useState(false);
+  const [isRecipeInProgress, setIsRecipeInProgress] = useState(false);
 
   useEffect(() => {
     if (inProgressRecipes[inProgressName][id]) {
       setButtonText('Continue Recipe');
+      setIsRecipeInProgress(true);
     } else {
       setButtonText('Start Recipe');
+      setIsRecipeInProgress(false);
     }
   }, [id, inProgressName, inProgressRecipes]);
 
@@ -67,6 +71,25 @@ function FoodDetails() {
     };
     fetchRecomendations();
   }, [name]);
+
+  const startRecipe = () => {
+    if (!isRecipeInProgress) {
+      const ingredientsArray = foodIngredients
+        .map(({ ingredient, measure }) => (
+          { done: false, ingredient: `${ingredient}${measure}` }
+        ));
+
+      setInProgressRecipes((prevState) => (
+        {
+          ...prevState,
+          [inProgressName]:
+            { ...prevState[inProgressName], [id]: ingredientsArray },
+        }
+      ));
+    }
+
+    push(`/${literalName}/${id}/in-progress`);
+  };
 
   if (!foodDetails[strName]) return <h2>Carregando...</h2>;
 
@@ -122,14 +145,15 @@ function FoodDetails() {
       </section>
 
       {!isRecipeDone && (
-        <button
+        <Button
+          size="lg"
           className="start-recipe-btn"
           data-testid="start-recipe-btn"
           type="button"
-          onClick={ () => push(`/${literalName}/${id}/in-progress`) }
+          onClick={ startRecipe }
         >
           {buttonText}
-        </button>
+        </Button>
       )}
     </div>
   );
