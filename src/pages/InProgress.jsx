@@ -40,25 +40,24 @@ function InProgress() {
         { done: false, ingredient: `${ingredient}${measure}` }
       ));
 
-    // setInProgressRecipes((prevState) => (
-    //   {
-    //     ...prevState,
-    //     [inProgressName]: // cocktails ou meals
-    //     {
-    //       ...prevState[inProgressName],
-    //       [id]:
-    //         [...prevState[inProgressName][id].length > 0
-    //           ? [...prevState[inProgressName][id]] : ingredientsArray],
-    //     },
-    //   }
-    // ));
-    const recipes = { ...inProgressRecipes };
+    setInProgressRecipes((prevState) => (
+      {
+        ...prevState,
+        [inProgressName]: // cocktails ou meals
+        {
+          ...prevState[inProgressName],
+          [id]: prevState[inProgressName][id]?.length > 0
+            ? [...prevState[inProgressName][id]] : ingredientsArray,
+        },
+      }
+    ));
+    // const recipes = { ...inProgressRecipes };
 
-    recipes[inProgressName][id] = recipes[inProgressName][id].length > 0
-      ? recipes[inProgressName][id]
-      : ingredientsArray;
+    // recipes[inProgressName][id] = recipes[inProgressName][id]?.length > 0
+    //   ? recipes[inProgressName][id]
+    //   : ingredientsArray;
 
-    setInProgressRecipes(recipes);
+    // setInProgressRecipes(recipes);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [foodIngredients]);
 
