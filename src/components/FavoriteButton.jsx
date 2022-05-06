@@ -18,7 +18,7 @@ function ShareAndFavorites() {
   useEffect(() => {
     const isItFavorite = favoriteRecipes.some(({ id: recipeId }) => recipeId === id);
     setIsRecipeFavorite(isItFavorite);
-  }, [favoriteRecipes, id]);
+  }, []);
 
   useEffect(() => {
     if (isRecipeFavorite) {
