@@ -35,30 +35,36 @@ function InProgress() {
   }, [setFoodId, id]);
 
   useEffect(() => {
-    console.log('entrou aqui');
     const ingredientsArray = foodIngredients
       .map(({ ingredient, measure }) => (
         { done: false, ingredient: `${ingredient}${measure}` }
       ));
 
-    setInProgressRecipes((prevState) => (
-      {
-        ...prevState,
-        [inProgressName]:
-        {
-          ...prevState[inProgressName],
-          [id]:
-            [...prevState[inProgressName][id].length > 0
-              ? [...prevState[inProgressName][id]] : ingredientsArray],
-        },
-      }
-    ));
+    // setInProgressRecipes((prevState) => (
+    //   {
+    //     ...prevState,
+    //     [inProgressName]: // cocktails ou meals
+    //     {
+    //       ...prevState[inProgressName],
+    //       [id]:
+    //         [...prevState[inProgressName][id].length > 0
+    //           ? [...prevState[inProgressName][id]] : ingredientsArray],
+    //     },
+    //   }
+    // ));
+    const recipes = { ...inProgressRecipes };
+
+    recipes[inProgressName][id] = recipes[inProgressName][id].length > 0
+      ? recipes[inProgressName][id]
+      : ingredientsArray;
+
+    setInProgressRecipes(recipes);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [foodIngredients]);
 
   useEffect(() => {
     const arrayToCheck = inProgressRecipes[inProgressName][id];
-    const condition = arrayToCheck.every(({ done }) => done);
+    const condition = arrayToCheck ? arrayToCheck.every(({ done }) => done) : false;
     setIsFinishDisabled(!condition);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inProgressRecipes]);
