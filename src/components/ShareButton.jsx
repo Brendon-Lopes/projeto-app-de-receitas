@@ -18,7 +18,10 @@ function ShareButton() {
   }, [copyMessageVisible]);
 
   const handleShareClick = () => {
-    copy(window.location.href);
+    const url = window.location.href;
+    const urlArray = url.split('/');
+    const newUrl = `${urlArray[0]}//${urlArray[2]}/${urlArray[3]}/${urlArray[4]}`;
+    copy(newUrl);
     setCopyMessageVisible(true);
   };
 
