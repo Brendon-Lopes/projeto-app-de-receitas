@@ -18,7 +18,7 @@ function FoodDetails() {
   };
 
   const [doneRecipes] = useLocalStorage('doneRecipes', []);
-  const [inProgressRecipes, setInProgressRecipes] = useLocalStorage(
+  const [inProgressRecipes] = useLocalStorage(
     'inProgressRecipes', inProgressDefaultValue,
   );
 
@@ -37,15 +37,15 @@ function FoodDetails() {
   const [recomendations, setRecomendations] = useState([]);
   const [buttonText, setButtonText] = useState('');
   const [isRecipeDone, setIsRecipeDone] = useState(false);
-  const [isRecipeInProgress, setIsRecipeInProgress] = useState(false);
+  // const [isRecipeInProgress, setIsRecipeInProgress] = useState(false);
 
   useEffect(() => {
     if (inProgressRecipes[inProgressName][id]) {
       setButtonText('Continue Recipe');
-      setIsRecipeInProgress(true);
+      // setIsRecipeInProgress(true);
     } else {
       setButtonText('Start Recipe');
-      setIsRecipeInProgress(false);
+      // setIsRecipeInProgress(false);
     }
   }, [id, inProgressName, inProgressRecipes]);
 
@@ -72,21 +72,21 @@ function FoodDetails() {
     fetchRecomendations();
   }, [name]);
 
-  const startRecipe = () => {
-    if (!isRecipeInProgress) {
-      const ingredientsArray = foodIngredients
-        .map(({ ingredient, measure }) => (
-          { done: false, ingredient: `${ingredient}${measure}` }
-        ));
+  const goToInProgress = () => {
+    // if (!isRecipeInProgress) {
+    //   const ingredientsArray = foodIngredients
+    //     .map(({ ingredient, measure }) => (
+    //       { done: false, ingredient: `${ingredient}${measure}` }
+    //     ));
 
-      setInProgressRecipes((prevState) => (
-        {
-          ...prevState,
-          [inProgressName]:
-            { ...prevState[inProgressName], [id]: ingredientsArray },
-        }
-      ));
-    }
+    //   setInProgressRecipes((prevState) => (
+    //     {
+    //       ...prevState,
+    //       [inProgressName]:
+    //         { ...prevState[inProgressName], [id]: ingredientsArray },
+    //     }
+    //   ));
+    // }
 
     push(`/${literalName}/${id}/in-progress`);
   };
@@ -150,7 +150,7 @@ function FoodDetails() {
           className="start-recipe-btn"
           data-testid="start-recipe-btn"
           type="button"
-          onClick={ startRecipe }
+          onClick={ goToInProgress }
         >
           {buttonText}
         </Button>
