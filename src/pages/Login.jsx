@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import { Button, Form } from 'react-bootstrap';
 import Context from '../context/generalContext/context';
 import useLocalStorage from '../hooks/useLocalStorage';
+import './login.css';
 
 function Login({ history }) {
   const [, setLocalEmail] = useLocalStorage('user', '');
@@ -25,42 +26,57 @@ function Login({ history }) {
   };
 
   return (
-    <form>
-      <h1>Login</h1>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control
-          data-testid="email-input"
-          type="text"
-          name="email"
-          placeholder="Email"
-          value={ email }
-          onChange={ changeEmail }
-        />
-      </Form.Group>
+    <div className="Login">
+      <p className="text-success mt-3 p-1 text-left">
+        Bem vindo ao
+      </p>
+      <h1 className="shadow-sm text-success mt-5 p-3 text-center rounded">
+        App de Receitas
+      </h1>
+      <form>
+        <h2
+          className="text-success mt-5 p-3 text-center rounded"
+        >
+          Login
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          data-testid="password-input"
-          type="password"
-          name="password"
-          placeholder="Senha"
-          value={ password }
-          onChange={ changePassword }
-        />
-      </Form.Group>
+        </h2>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            data-testid="email-input"
+            type="text"
+            name="email"
+            placeholder="Email"
+            value={ email }
+            onChange={ changeEmail }
+          />
+        </Form.Group>
 
-      <Button
-        variant="success"
-        data-testid="login-submit-btn"
-        type="button"
-        disabled={ isDisabled }
-        onClick={ handleClick }
-      >
-        Enter
-      </Button>
-    </form>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            data-testid="password-input"
+            type="password"
+            name="password"
+            placeholder="Senha"
+            value={ password }
+            onChange={ changePassword }
+          />
+        </Form.Group>
+
+        <div className="d-grid text-center rounded">
+          <Button
+            variant="success"
+            data-testid="login-submit-btn"
+            type="button"
+            disabled={ isDisabled }
+            onClick={ handleClick }
+          >
+            Enter
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 }
 

@@ -29,7 +29,7 @@ function DrinksResults() {
     <main>
       <section>
         <ButtonGroup
-          style={ { width: '100%' } }
+          style={ { width: '130%' } }
           className="me-2"
           aria-label="First group"
         >
