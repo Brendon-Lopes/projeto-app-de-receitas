@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import propTypes from 'prop-types';
-import useLocalStorage from '../hooks/useLocalStorage';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import Context from '../context/generalContext/context';
 
 function FavoriteButtonCard({ id, index }) {
-  const [, setFavoriteRecipes] = useLocalStorage('favoriteRecipes', []);
+  const { setFavoriteRecipes } = useContext(Context);
 
   const handleFavoriteClick = () => {
     setFavoriteRecipes((prevState) => prevState.filter((recipe) => recipe.id !== id));

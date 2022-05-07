@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import propTypes from 'prop-types';
 import ShareFavoriteButton from './ShareFavoriteButton';
 import FavoriteButtonCard from './FavoriteButtonCard';
@@ -7,15 +8,20 @@ function FavoriteCard({ data:
   { id, image, name, nationality, category, type, alcoholicOrNot }, index }) {
   return (
     <div>
-      <img
-        src={ image }
-        alt={ name }
-        data-testid={ `${index}-horizontal-image` }
-      />
+      <Link to={ `${type === 'food' ? 'foods' : 'drinks'}/${id}` }>
+        <img
+          style={ { maxWidth: '100vw' } }
+          src={ image }
+          alt={ name }
+          data-testid={ `${index}-horizontal-image` }
+        />
+      </Link>
       <p data-testid={ `${index}-horizontal-top-text` }>
         {nationality ? `${nationality} - ${category}` : `${alcoholicOrNot} - ${category}`}
       </p>
-      <p data-testid={ `${index}-horizontal-name` }>{name}</p>
+      <Link to={ `${type === 'food' ? 'foods' : 'drinks'}/${id}` }>
+        <p data-testid={ `${index}-horizontal-name` }>{name}</p>
+      </Link>
       <ShareFavoriteButton
         id={ id }
         type={ type === 'food' ? 'foods' : 'drinks' }
