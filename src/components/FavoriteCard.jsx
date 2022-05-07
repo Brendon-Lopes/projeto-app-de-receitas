@@ -15,13 +15,11 @@ function FavoriteCard({ data:
           alt={ name }
           data-testid={ `${index}-horizontal-image` }
         />
+        <p data-testid={ `${index}-horizontal-name` }>{name}</p>
       </Link>
       <p data-testid={ `${index}-horizontal-top-text` }>
         {nationality ? `${nationality} - ${category}` : `${alcoholicOrNot} - ${category}`}
       </p>
-      <Link to={ `${type === 'food' ? 'foods' : 'drinks'}/${id}` }>
-        <p data-testid={ `${index}-horizontal-name` }>{name}</p>
-      </Link>
       <ShareFavoriteButton
         id={ id }
         type={ type === 'food' ? 'foods' : 'drinks' }
