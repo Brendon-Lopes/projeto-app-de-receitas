@@ -49,3 +49,17 @@ export async function getDrinkDetailsById(id) {
   const data = await response.json();
   return data.drinks[0];
 }
+
+export async function getNationality() {
+  const url = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
+  const response = await fetch(url);
+  const data = await response.json();
+  return data.meals;
+}
+
+export async function getNationalityFood(nationality) {
+  const url = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${nationality}`;
+  const response = await fetch(url);
+  const data = await response.json();
+  return data.meals;
+}
