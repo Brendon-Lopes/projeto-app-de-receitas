@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
+import useLocalStorage from '../../hooks/useLocalStorage';
 import Context from './context';
 
 function ContextProvider({ children }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isDisabled, setDisabled] = useState(true);
+
+  const [favoriteRecipes, setFavoriteRecipes] = useLocalStorage('favoriteRecipes', []);
 
   function changeEmail(event) {
     setEmail(event.target.value);
@@ -31,6 +34,8 @@ function ContextProvider({ children }) {
     isDisabled,
     changeEmail,
     changePassword,
+    favoriteRecipes,
+    setFavoriteRecipes,
   };
 
   return (
