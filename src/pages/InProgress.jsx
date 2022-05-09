@@ -11,7 +11,8 @@ function InProgress() {
 
   const { push } = useHistory();
 
-  const { inProgressName, name, strNameThumb, strName, strCategory } = usePath();
+  const { inProgressName,
+    name, strNameThumb, strName, strCategory, type } = usePath();
 
   const inProgressDefaultValue = {
     cocktails: {},
@@ -21,6 +22,7 @@ function InProgress() {
   const [inProgressRecipes, setInProgressRecipes] = useLocalStorage(
     'inProgressRecipes', { ...inProgressDefaultValue, [inProgressName]: { [id]: [] } },
   );
+  const [doneRecipesState, setDoneRecipesState] = useLocalStorage('doneRecipes', []);
 
   const { setName, setFoodId, foodDetails, foodIngredients } = useContext(DetailsContext);
 
@@ -84,6 +86,23 @@ function InProgress() {
   };
 
   const finishRecipe = () => {
+    const date = new Date().toLocaleDateString();
+    console.log(doneRecipesState);
+    console.log(foodDetails);
+    setDoneRecipesState((prevState) => ([
+      ...prevState,
+      { id,
+        type,
+        nationality: foodDetails.strArea,
+        category: foodDetails[strCategory],
+        alcoholicOrNot: foodDetails.strAlcoholic || '',
+        name: foodDetails[strName],
+        image: foodDetails[strNameThumb],
+        doneDate: date,
+        tags: foodDetails.strTags?.split(',') || [],
+      },
+    ]));
+    console.log('saiu');
     push('/done-recipes');
   };
 
