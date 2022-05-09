@@ -11,12 +11,18 @@ function SearchProvider({ children }) {
   const [foodsList, setFoodsList] = useState([]);
   const [drinksCategoryList, setDrinksCategoryList] = useState([]);
   const [foodsCategoryList, setFoodsCategoryList] = useState([]);
+  const [nationalityList, setNationalityList] = useState([]);
 
   async function getCategory() {
     const response = await fetchAPI.getDrinksCategory();
     const foodsResponse = await fetchAPI.getFoodsCategory();
     setDrinksCategoryList(response.drinks);
     setFoodsCategoryList(foodsResponse.meals);
+  }
+
+  async function getNationalityList() {
+    const response = await fetchAPI.getNationality();
+    setNationalityList(response);
   }
 
   useEffect(() => {
@@ -28,6 +34,7 @@ function SearchProvider({ children }) {
     };
     drinksRecipes();
     getCategory();
+    getNationalityList();
   }, []);
 
   const value = {
@@ -43,6 +50,7 @@ function SearchProvider({ children }) {
     setFoodsList,
     drinksCategoryList,
     foodsCategoryList,
+    nationalityList,
   };
 
   return (
