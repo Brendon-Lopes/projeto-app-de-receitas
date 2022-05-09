@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import propTypes from 'prop-types';
 import copy from 'clipboard-copy';
+import propTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 
-function ShareButton({ dataTest, route }) {
+function ShareFavoriteButton({ type, id, index }) {
   const [copyMessageVisible, setCopyMessageVisible] = useState(false);
 
   useEffect(() => {
@@ -19,24 +19,18 @@ function ShareButton({ dataTest, route }) {
   }, [copyMessageVisible]);
 
   const handleShareClick = () => {
-    const url = window.location.href;
-    const urlArray = url.split('/');
-    const newUrl = `${urlArray[0]}//${urlArray[2]}/${urlArray[3]}/${urlArray[4]}`;
-    if (route) {
-      copy(`http://localhost:3000/${route}`);
-    } else {
-      copy(newUrl);
-    }
+    const url = `${window.location.origin}/${type}/${id}`;
+    copy(url);
     setCopyMessageVisible(true);
   };
 
   return (
     <div>
       <img
+        data-testid={ `${index}-horizontal-share-btn` }
         src={ shareIcon }
         alt="share"
         role="presentation"
-        data-testid={ dataTest || 'share-btn' }
         onClick={ handleShareClick }
       />
       {copyMessageVisible && <p>Link copied!</p>}
@@ -44,8 +38,10 @@ function ShareButton({ dataTest, route }) {
   );
 }
 
-ShareButton.propTypes = {
-  dataTest: propTypes.string,
+ShareFavoriteButton.propTypes = {
+  type: propTypes.string,
+  id: propTypes.string,
+  index: propTypes.number,
 }.isRequired;
 
-export default ShareButton;
+export default ShareFavoriteButton;

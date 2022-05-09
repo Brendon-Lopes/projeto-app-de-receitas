@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Button, ButtonGroup, Card } from 'react-bootstrap';
+import { Button, ButtonGroup, Figure } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import SearchContext from '../context/searchContext';
 import { fetchDrinksByCategory, getDrinksRecipes } from '../services/fetchAPI';
@@ -62,20 +62,24 @@ function DrinksResults() {
       {drinksList.length > 0 && drinksList
         .filter((_e, index) => index < maxNumber)
         .map(({ strDrink, strDrinkThumb, idDrink }, index) => (
-          <Card style={ { width: '20rem' } } key={ index }>
-            <Link to={ `/drinks/${idDrink}` }>
-              <div data-testid={ `${index}-recipe-card` }>
-                <Card.Header data-testid={ `${index}-card-name` }>
-                  {strDrink}
-                </Card.Header>
-                <Card.Img
-                  src={ strDrinkThumb }
-                  alt="recipe"
-                  data-testid={ `${index}-card-img` }
-                />
-              </div>
-            </Link>
-          </Card>
+          <Link to={ `/drinks/${idDrink}` } key={ index }>
+            <div data-testid={ `${index}-recipe-card` }>
+              <p
+                data-testid={ `${index}-card-name` }
+                className="font-weight-bold text-monospace text-center shadow-sm"
+              >
+                {strDrink}
+              </p>
+              <Figure.Image
+                className="rounded mx-auto d-block"
+                width={ 360 }
+                height={ 360 }
+                src={ strDrinkThumb }
+                alt="recipe"
+                data-testid={ `${index}-card-img` }
+              />
+            </div>
+          </Link>
         ))}
     </main>
   );

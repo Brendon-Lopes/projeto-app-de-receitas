@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Button, ButtonGroup, Card } from 'react-bootstrap';
+import { Button, ButtonGroup, Figure } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import SearchContext from '../context/searchContext';
 import { getFoodRecipes, fetchFoodsByCategory } from '../services/fetchAPI';
@@ -62,22 +62,26 @@ function FoodsResults() {
       {foodsList.length > 0 && foodsList
         .filter((_e, index) => index < maxNumber)
         .map(({ strMeal, strMealThumb, idMeal }, index) => (
-          <Card style={ { width: '20rem' } } key={ index }>
-            <Link to={ `/foods/${idMeal}` }>
-              <div data-testid={ `${index}-recipe-card` }>
-                <Card.Header data-testid={ `${index}-card-name` }>
-                  {strMeal}
-                </Card.Header>
-                <Card.Img
-                  variant="top"
-                  width="300px"
+          <Link to={ `/foods/${idMeal}` } key={ index }>
+            <div data-testid={ `${index}-recipe-card` }>
+              <p
+                className="font-weight-bold text-monospace text-center shadow-sm"
+                data-testid={ `${index}-card-name` }
+              >
+                {strMeal}
+              </p>
+              <Figure>
+                <Figure.Image
+                  className="rounded mx-auto d-block"
+                  width={ 360 }
+                  height={ 360 }
                   src={ strMealThumb }
                   alt="recipe"
                   data-testid={ `${index}-card-img` }
                 />
-              </div>
-            </Link>
-          </Card>
+              </Figure>
+            </div>
+          </Link>
         ))}
     </main>
   );

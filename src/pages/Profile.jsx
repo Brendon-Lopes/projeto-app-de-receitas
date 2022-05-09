@@ -12,9 +12,16 @@ function Profile({ history }) {
   return (
     <div>
       <Header title="Profile" />
-      <h2 data-testid="profile-email">{user}</h2>
+      <p
+        className="font-weight-bold text-monospace text-center shadow-sm"
+        data-testid="profile-email"
+      >
+        {user}
+
+      </p>
       <div>
         <button
+          variant="secondary"
           type="button"
           data-testid="profile-done-btn"
           onClick={ () => history.push('/done-recipes') }
@@ -23,6 +30,7 @@ function Profile({ history }) {
 
         </button>
         <button
+          variant="secondary"
           type="button"
           data-testid="profile-favorite-btn"
           onClick={ () => history.push('/favorite-recipes') }
@@ -30,7 +38,9 @@ function Profile({ history }) {
           Favorite Recipes
 
         </button>
+
         <button
+          variant="secondary"
           type="button"
           data-testid="profile-logout-btn"
           onClick={ clearLocalStorage }
