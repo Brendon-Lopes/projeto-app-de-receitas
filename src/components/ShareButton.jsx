@@ -1,22 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import propTypes from 'prop-types';
 import copy from 'clipboard-copy';
 import shareIcon from '../images/shareIcon.svg';
+import DetailsContext from '../context/detailsContext/index';
 
 function ShareButton({ dataTest, route }) {
-  const [copyMessageVisible, setCopyMessageVisible] = useState(false);
-
-  useEffect(() => {
-    if (copyMessageVisible) {
-      const TIME_LIMIT = 3000;
-      const timeOut = setTimeout(() => {
-        setCopyMessageVisible(false);
-      }, TIME_LIMIT);
-      return function cleanUp() {
-        clearTimeout(timeOut);
-      };
-    }
-  }, [copyMessageVisible]);
+  const { setCopyMessageVisible } = useContext(DetailsContext);
 
   const handleShareClick = () => {
     const url = window.location.href;
@@ -33,13 +22,14 @@ function ShareButton({ dataTest, route }) {
   return (
     <div>
       <img
+        width={ 30 }
+        height={ 30 }
         src={ shareIcon }
         alt="share"
         role="presentation"
         data-testid={ dataTest || 'share-btn' }
         onClick={ handleShareClick }
       />
-      {copyMessageVisible && <p>Link copied!</p>}
     </div>
   );
 }

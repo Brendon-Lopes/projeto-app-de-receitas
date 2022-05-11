@@ -8,6 +8,7 @@ function DetailsProvider({ children }) {
   const [foodDetails, setFoodDetails] = useState({});
   const [foodIngredients, setFoodIngredients] = useState([]);
   const [name, setName] = useState('');
+  const [copyMessageVisible, setCopyMessageVisible] = useState(false);
 
   useEffect(() => {
     if (foodId !== 0) {
@@ -29,6 +30,8 @@ function DetailsProvider({ children }) {
     foodIngredients,
     setFoodIngredients,
     setName,
+    copyMessageVisible,
+    setCopyMessageVisible,
   };
 
   useEffect(() => {

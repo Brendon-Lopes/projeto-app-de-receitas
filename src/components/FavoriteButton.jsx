@@ -51,6 +51,8 @@ function ShareAndFavorites() {
 
   return (
     <img
+      width={ 30 }
+      height={ 30 }
       src={ isRecipeFavorite ? blackHeartIcon : whiteHeartIcon }
       alt="favorite"
       role="presentation"

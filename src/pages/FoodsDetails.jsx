@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
+import { Button, Figure } from 'react-bootstrap';
 import usePath from '../hooks/usePath';
 import DetailsContext from '../context/detailsContext';
 import YoutubeEmbed from '../components/YoutubeEmbed';
@@ -9,7 +9,6 @@ import RecomendationCard from '../components/RecomendationCard';
 import useLocalStorage from '../hooks/useLocalStorage';
 import FavoriteButton from '../components/FavoriteButton';
 import ShareButton from '../components/ShareButton';
-import './FoodsDetails.css';
 
 function FoodDetails() {
   const inProgressDefaultValue = {
@@ -23,7 +22,7 @@ function FoodDetails() {
   );
 
   const { name, strName, strNameThumb, strCategory,
-    strNameI, strNameThumbI, strCategoryI, literalName,
+    literalName,
     inProgressName } = usePath();
 
   const { id } = useParams();
@@ -32,7 +31,9 @@ function FoodDetails() {
   const { setFoodId,
     foodDetails,
     foodIngredients,
-    setName } = useContext(DetailsContext);
+    setName,
+    copyMessageVisible,
+    setCopyMessageVisible } = useContext(DetailsContext);
 
   const [recomendations, setRecomendations] = useState([]);
   const [buttonText, setButtonText] = useState('');
@@ -72,6 +73,18 @@ function FoodDetails() {
     fetchRecomendations();
   }, [name]);
 
+  useEffect(() => {
+    if (copyMessageVisible) {
+      const TIME_LIMIT = 3000;
+      const timeOut = setTimeout(() => {
+        setCopyMessageVisible(false);
+      }, TIME_LIMIT);
+      return function cleanUp() {
+        clearTimeout(timeOut);
+      };
+    }
+  }, [copyMessageVisible]);
+
   const goToInProgress = () => {
     // if (!isRecipeInProgress) {
     //   const ingredientsArray = foodIngredients
@@ -95,23 +108,46 @@ function FoodDetails() {
 
   return (
     <div>
-      <img
-        className="recipe-photo"
-        data-testid="recipe-photo"
-        src={ foodDetails[strNameThumb] }
-        alt={ foodDetails[strName] }
-      />
-      <h2 data-testid="recipe-title">{foodDetails[strName]}</h2>
+      <Figure className="mb-0">
+        <Figure.Image
+          className="recipe-photo mb-0"
+          data-testid="recipe-photo"
+          src={ foodDetails[strNameThumb] }
+          alt={ foodDetails[strName] }
+        />
+      </Figure>
+      <div
+        className="container d-flex justify-content-between"
+        style={ { backgroundColor: 'orange', border: 'none' } }
+      >
+        <h2 data-testid="recipe-title">{foodDetails[strName]}</h2>
+        <div className="d-flex">
+          {copyMessageVisible && <p>Link copied!</p>}
+          <ShareButton />
+          <FavoriteButton />
+        </div>
+      </div>
 
-      <ShareButton />
-      <FavoriteButton />
+      <p
+        data-testid="recipe-category"
+        className="pl-3 fs-2 fw-bolder bg-warning"
+      >
+        {foodDetails[strCategory]}
 
-      <h2 data-testid="recipe-category">{foodDetails[strCategory]}</h2>
+      </p>
+      <h2
+        className="text-center mb-0"
+      >
+        Ingredients
 
-      <h2>Ingredients</h2>
-      <ul>
+      </h2>
+      <ul
+        style={ { backgroundColor: 'secondary' } }
+        className="text-center list-group "
+      >
         {foodIngredients.map(({ ingredient, measure }, index) => (
           <li
+            className="list-group-item"
             data-testid={ `${index}-ingredient-name-and-measure` }
             key={ index }
           >
@@ -121,33 +157,43 @@ function FoodDetails() {
         ))}
       </ul>
 
-      <h2>Instructions</h2>
-      <p data-testid="instructions">{foodDetails.strInstructions}</p>
+      <h2
+        className="text-center mt-2 mb-0"
+      >
+        Instructions
+
+      </h2>
+      <p
+        className="p-2 "
+        data-testid="instructions"
+      >
+        {foodDetails.strInstructions}
+
+      </p>
 
       {name === 'meals' && (
         <div>
-          <h2>Video</h2>
-          <YoutubeEmbed embedId={ foodDetails.strYoutube.split('=')[1] } />
+          <h2 className="text-center">Video</h2>
+          <div className="d-flex justify-content-center">
+            <YoutubeEmbed embedId={ foodDetails.strYoutube.split('=')[1] } />
+
+          </div>
         </div>
       )}
 
-      <h3>Receitas recomendadas</h3>
-      <section className="carousel">
-        {recomendations.map((rec, index) => (
-          <RecomendationCard
-            key={ index }
-            imgSrc={ rec[strNameThumbI] }
-            category={ rec[strCategoryI] }
-            name={ rec[strNameI] }
-            index={ index }
-          />
-        ))}
+      <h3 className="text-center my-3">Receitas recomendadas</h3>
+      <section>
+        <RecomendationCard
+          data={ recomendations }
+        />
+
       </section>
 
       {!isRecipeDone && (
         <Button
           size="lg"
-          className="start-recipe-btn"
+          className="start-recipe-btn fixed-bottom mt-2"
+          style={ { backgroundColor: '#704e2e', border: 'none' } }
           data-testid="start-recipe-btn"
           type="button"
           onClick={ goToInProgress }
