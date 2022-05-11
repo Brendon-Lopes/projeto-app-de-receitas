@@ -108,7 +108,7 @@ function FoodDetails() {
 
   return (
     <div>
-      <Figure className="mb-0">
+      <Figure className="d-flex justify-content-center mb-0">
         <Figure.Image
           className="recipe-photo mb-0"
           data-testid="recipe-photo"
@@ -117,11 +117,11 @@ function FoodDetails() {
         />
       </Figure>
       <div
-        className="container d-flex justify-content-between"
+        className="d-flex justify-content-between mx-0 px-2"
         style={ { backgroundColor: 'orange', border: 'none' } }
       >
         <h2 data-testid="recipe-title">{foodDetails[strName]}</h2>
-        <div className="d-flex">
+        <div className="d-flex align-items-center">
           {copyMessageVisible && <p>Link copied!</p>}
           <ShareButton />
           <FavoriteButton />
@@ -164,7 +164,7 @@ function FoodDetails() {
 
       </h2>
       <p
-        className="p-2 "
+        className="p-2"
         data-testid="instructions"
       >
         {foodDetails.strInstructions}
@@ -172,9 +172,9 @@ function FoodDetails() {
       </p>
 
       {name === 'meals' && (
-        <div>
+        <div className=" mw-100">
           <h2 className="text-center">Video</h2>
-          <div className="d-flex justify-content-center">
+          <div className="d-flex justify-content-center ">
             <YoutubeEmbed embedId={ foodDetails.strYoutube.split('=')[1] } />
 
           </div>

@@ -7,31 +7,34 @@ function RecomendationCard({ data }) {
   const { strNameThumbI, strCategoryI, strNameI } = usePath();
 
   return (
-    <Carousel interval={ 4000 }>
-      {data.map((rec, index) => (
-        <Carousel.Item key={ index }>
-          <div
-            key={ index }
-            data-testid={ `${index}-recomendation-card` }
-          >
-            <img
-              src={ rec[strNameThumbI] }
-              alt={ rec[strNameI] }
-              className="d-block w-100"
-            />
-            <Carousel.Caption>
-              <h4 style={ { textShadow: '2px 2px 2px black' } }>{rec[strCategoryI]}</h4>
-              <h3
-                style={ { textShadow: '2px 2px 2px black' } }
-                data-testid={ `${index}-recomendation-title` }
-              >
-                {rec[strNameI]}
+    <div style={ { maxWidth: '900px' } }>
+      <Carousel interval={ 4000 }>
+        {data.map((rec, index) => (
+          <Carousel.Item key={ index }>
+            <div
+              key={ index }
+              data-testid={ `${index}-recomendation-card` }
 
-              </h3>
-            </Carousel.Caption>
-          </div>
-        </Carousel.Item>))}
-    </Carousel>
+            >
+              <img
+                src={ rec[strNameThumbI] }
+                alt={ rec[strNameI] }
+                className="d-block w-100"
+              />
+              <Carousel.Caption>
+                <h4 style={ { textShadow: '2px 2px 2px black' } }>{rec[strCategoryI]}</h4>
+                <h3
+                  style={ { textShadow: '2px 2px 2px black' } }
+                  data-testid={ `${index}-recomendation-title` }
+                >
+                  {rec[strNameI]}
+
+                </h3>
+              </Carousel.Caption>
+            </div>
+          </Carousel.Item>))}
+      </Carousel>
+    </div>
   );
 }
 
