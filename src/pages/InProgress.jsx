@@ -139,7 +139,7 @@ function InProgress() {
       </p>
 
       <h2 className="text-center mb-0">Ingredients</h2>
-      <div className="text-center list-group">
+      <div className="list-group">
         {inProgressRecipes[inProgressName][id]
           && inProgressRecipes[inProgressName][id].map(({ ingredient, done }, index) => (
             <label

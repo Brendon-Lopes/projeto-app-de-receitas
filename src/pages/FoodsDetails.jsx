@@ -136,14 +136,14 @@ function FoodDetails() {
 
       </p>
       <h2
-        className="text-center mb-0"
+        className="text-center mb-1"
       >
         Ingredients
 
       </h2>
       <ul
         style={ { backgroundColor: 'secondary' } }
-        className="text-center list-group "
+        className="list-group "
       >
         {foodIngredients.map(({ ingredient, measure }, index) => (
           <li
