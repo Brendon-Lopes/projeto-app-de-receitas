@@ -23,7 +23,7 @@ function InProgress() {
   const [inProgressRecipes, setInProgressRecipes] = useLocalStorage(
     'inProgressRecipes', { ...inProgressDefaultValue, [inProgressName]: { [id]: [] } },
   );
-  const [doneRecipesState, setDoneRecipesState] = useLocalStorage('doneRecipes', []);
+  const [, setDoneRecipesState] = useLocalStorage('doneRecipes', []);
 
   const { setName, setFoodId, foodDetails, foodIngredients } = useContext(DetailsContext);
 
@@ -54,13 +54,6 @@ function InProgress() {
         },
       }
     ));
-    // const recipes = { ...inProgressRecipes };
-
-    // recipes[inProgressName][id] = recipes[inProgressName][id]?.length > 0
-    //   ? recipes[inProgressName][id]
-    //   : ingredientsArray;
-
-    // setInProgressRecipes(recipes);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [foodIngredients]);
 
@@ -88,8 +81,6 @@ function InProgress() {
 
   const finishRecipe = () => {
     const date = new Date().toLocaleDateString();
-    console.log(doneRecipesState);
-    console.log(foodDetails);
     setDoneRecipesState((prevState) => ([
       ...prevState,
       { id,
@@ -103,7 +94,6 @@ function InProgress() {
         tags: foodDetails.strTags?.split(',') || [],
       },
     ]));
-    console.log('saiu');
     push('/done-recipes');
   };
 

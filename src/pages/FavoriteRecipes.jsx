@@ -23,7 +23,6 @@ function FavoriteRecipes() {
 
   return (
     <div>
-      {console.log(favoriteRecipes)}
       <Header title="Favorite Recipes" />
       <section>
         <button

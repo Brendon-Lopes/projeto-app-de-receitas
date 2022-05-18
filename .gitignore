@@ -5,9 +5,6 @@
 /.pnp
 .pnp.js
 
-# testing
-/coverage
-
 # production
 /build
 
@@ -23,8 +20,3 @@ yarn-debug.log*
 yarn-error.log*
 
 .vscode
-
-
-cypress/screenshots/
-cypress/videos/
-cypress/reports

@@ -13,7 +13,6 @@ const fetchFoodAPI = async (option, input, type) => {
   };
 
   try {
-    console.log(url[type]);
     const response = await fetch(url[type]);
     const data = await response.json();
     return data;
